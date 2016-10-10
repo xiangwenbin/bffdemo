@@ -1,3 +1,6 @@
+/**
+ * 服务启动入口
+ */
 import Koa from 'koa';
 import logger from 'koa-logger';
 import koaStatic from 'koa-static';
@@ -21,7 +24,7 @@ app.use(async (ctx, next) => {
   } catch (err) {
     err.status = err.statusCode || err.status || 500;
     // throw err;
-    ctx.body = JSON.stringify({ code: err.status, data: JSON.stringify(err)});
+    ctx.body = JSON.stringify({ code: err.status, data: JSON.stringify(err) });
   }
 });
 

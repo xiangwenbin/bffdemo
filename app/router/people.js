@@ -1,5 +1,5 @@
 import router from 'koa-router';
-var people=router();
+var people = router();
 people.get('/people', function (ctx, next) {
     // console.log(ctx);
     // console.log(ctx.request.query);
@@ -10,7 +10,7 @@ people.get('/people', function (ctx, next) {
     // }
     // ctx.num++;
     // console.log(ctx.num);
-    ctx.body = 'people body query 参数：'+JSON.stringify(ctx.request.query);
-     
+    ctx.body = 'people body query 参数：' + JSON.stringify(ctx.request.query);
+
 });
 export default people;

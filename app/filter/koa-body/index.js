@@ -30,51 +30,51 @@ module.exports = requestbody;
  * @api public
  */
 function requestbody(opts) {
-  
+
   opts = opts || {};
   opts.onError = 'onError' in opts ? opts.onError : false;
   opts.patchNode = 'patchNode' in opts ? opts.patchNode : false;
-  opts.patchKoa  = 'patchKoa'  in opts ? opts.patchKoa  : true;
+  opts.patchKoa = 'patchKoa' in opts ? opts.patchKoa : true;
   opts.multipart = 'multipart' in opts ? opts.multipart : false;
   opts.urlencoded = 'urlencoded' in opts ? opts.urlencoded : true;
   opts.json = 'json' in opts ? opts.json : true;
   opts.text = 'text' in opts ? opts.text : true;
-  opts.encoding  = 'encoding'  in opts ? opts.encoding  : 'utf-8';
+  opts.encoding = 'encoding' in opts ? opts.encoding : 'utf-8';
   opts.jsonLimit = 'jsonLimit' in opts ? opts.jsonLimit : '1mb';
   opts.formLimit = 'formLimit' in opts ? opts.formLimit : '56kb';
   opts.formidable = 'formidable' in opts ? opts.formidable : {};
   opts.textLimit = 'textLimit' in opts ? opts.textLimit : '56kb';
   opts.strict = 'strict' in opts ? opts.strict : true;
   opts.graphql = 'graphql' in opts ? opts.graphql : false;
-  
 
-  return async function (ctx,next){
+
+  return async function (ctx, next) {
     var body = {};
     // console.log(this.req);
     // so don't parse the body in strict mode
     if (!opts.strict || ["GET", "HEAD", "DELETE"].indexOf(ctx.method.toUpperCase()) === -1) {
       try {
         /**添加对application/graphql头的支持 */
-        if (opts.graphql||ctx.is('application/graphql'))  {
+        if (opts.graphql || ctx.is('application/graphql')) {
           console.log('application/graphql');
-          body = await buddy.text(ctx, {encoding: opts.encoding, limit: opts.jsonLimit});
+          body = await buddy.text(ctx, { encoding: opts.encoding, limit: opts.jsonLimit });
         }
-        else if (opts.json && ctx.is('json'))  {
-          body = await buddy.json(ctx, {encoding: opts.encoding, limit: opts.jsonLimit});
+        else if (opts.json && ctx.is('json')) {
+          body = await buddy.json(ctx, { encoding: opts.encoding, limit: opts.jsonLimit });
         }
         else if (opts.urlencoded && ctx.is('urlencoded')) {
-          body = await buddy.form(ctx, {encoding: opts.encoding, limit: opts.formLimit});
+          body = await buddy.form(ctx, { encoding: opts.encoding, limit: opts.formLimit });
         }
         else if (opts.text && ctx.is('text')) {
-          body = await buddy.text(ctx, {encoding: opts.encoding, limit: opts.textLimit});
+          body = await buddy.text(ctx, { encoding: opts.encoding, limit: opts.textLimit });
         }
         else if (opts.multipart && ctx.is('multipart')) {
           body = await formy(ctx, opts.formidable);
         }
-        
-      } catch(parsingError) {
-        
-        if (typeof(opts.onError) === 'function') {
+
+      } catch (parsingError) {
+
+        if (typeof (opts.onError) === 'function') {
           opts.onError(parsingError, ctx);
         } else {
           throw parsingError;
@@ -101,18 +101,18 @@ function requestbody(opts) {
  * @api private
  */
 function formy(ctx, opts) {
-  return function(done) {
+  return function (done) {
     var fields = {};
     var files = {};
     var form = new forms.IncomingForm(opts)
     form
-      .on('end', function() {
-        done(null, {fields: fields, files: files});
+      .on('end', function () {
+        done(null, { fields: fields, files: files });
       })
-      .on('error', function(err) {
+      .on('error', function (err) {
         done(err);
       })
-      .on('field', function(field, value) {
+      .on('field', function (field, value) {
         if (fields[field]) {
           if (Array.isArray(fields[field])) {
             fields[field].push(value);
@@ -123,7 +123,7 @@ function formy(ctx, opts) {
           fields[field] = value;
         }
       })
-      .on('file', function(field, file) {
+      .on('file', function (field, file) {
         if (files[field]) {
           if (Array.isArray(files[field])) {
             files[field].push(file);
@@ -134,7 +134,7 @@ function formy(ctx, opts) {
           files[field] = file;
         }
       });
-    if(opts.onFileBegin) {
+    if (opts.onFileBegin) {
       form.on('fileBegin', opts.onFileBegin);
     }
     form.parse(ctx.req);

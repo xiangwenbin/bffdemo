@@ -3,7 +3,7 @@ import {
     GraphQLSchema,
     GraphQLInt
 } from 'graphql';
-import ItemType from './itemType';
+import ItemType from '../model/itemType';
 import ItemService from '../service/itemService';
 let count = 0;
 
@@ -34,6 +34,7 @@ let schema = new GraphQLSchema({
         }
     })
 });
+
 /**
  * query ItemQuery { item{id,title} }
  * query ItemQuery{ item(id:1){id,title,price} }

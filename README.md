@@ -19,10 +19,12 @@
 		
 		 -filter 过滤器 koa中间件存放目录
 		
-		 -model graphql schema 模型存放目录
+		 -model 基础数据模型存放目录
 		
-		 -router 路由 异步接口目录
+		 -router 路由 客户端调用的异步接口目录
+
+         -schema 客户端查询模型存放目录
 		
 		 -service 微服务数据接口
 		 
-		 -view 前端模板文件目录
+		 -view 客户端模板文件目录
