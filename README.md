@@ -11,10 +11,17 @@ transform-es2015-spread （支持 ES6 的 spread 操作符）
 - transform-es2015-parameters （支持默认参数， 参数解构， 以及其他参数）
 
 ## 目录结构说明
-app  js 根目录
-  -const 常量 目录
-  -filter 过滤器 koa中间件存放目录
-  -model graphql schema 模型存放目录
-  -router 路由 异步接口目录
-  -service 微服务数据接口
-  -view 前端模板文件目录
+
+	app  js 根目录
+	
+		 -const 常量 目录
+		
+		 -filter 过滤器 koa中间件存放目录
+		
+		 -model graphql schema 模型存放目录
+		
+		 -router 路由 异步接口目录
+		
+		 -service 微服务数据接口
+		 
+		 -view 前端模板文件目录
