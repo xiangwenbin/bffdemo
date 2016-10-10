@@ -8,7 +8,7 @@ import rp from 'request-promise';
 class ItemService {
     static async getItem() {
         var item = {};
-        var item = await rp('http://localhost:3000/item.json').then(
+        item = await rp('http://localhost:3000/item.json').then(
             function (body) {
                 console.log("body", body);
                 return JSON.parse(body);

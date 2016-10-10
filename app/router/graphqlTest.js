@@ -1,5 +1,5 @@
 import router from 'koa-router';
-import {schema,ItemSchema} from '../schema/schema';
+import {schema, ItemSchema} from '../schema/schema';
 
 import { graphql } from 'graphql';
 var graphqlTest = router();
