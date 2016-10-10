@@ -1,0 +1,5 @@
+﻿#编译目录与IDE配置文件
+/.vscode
+/logs
+/node_modules
+/dist
