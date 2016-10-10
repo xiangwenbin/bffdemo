@@ -1,9 +1,16 @@
 import Koa from 'koa';
 import logger from 'koa-logger';
+import koaStatic from 'koa-static';
 import {people, Child, graphqlTest} from './router';
 import koaBody from './filter/koa-body';
 import bodyParser from 'body-parser';
 const app = new Koa();
+console.log(__dirname);
+
+/**
+ * 设置静态文件目录
+ */
+app.use(koaStatic('public'));
 
 /**
  * 异常处理

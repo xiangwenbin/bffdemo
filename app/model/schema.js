@@ -36,6 +36,7 @@ let schema = new GraphQLSchema({
 });
 /**
  * query ItemQuery { item{id,title} }
+ * query ItemQuery{ item(id:1){id,title,price} }
  */
 var ItemSchema = new GraphQLSchema({
     query: new GraphQLObjectType({
@@ -51,9 +52,10 @@ var ItemSchema = new GraphQLSchema({
                         required: true
                     }
                 },
-                resolve:async function (root, obj, ctx) {
-                    console.log(obj);
-                    let item =await ItemService();
+                resolve: function (root, obj, ctx) {
+                    console.log("item obj params",obj);
+                    console.log("item ctx params",ctx);
+                    let item = ItemService();
                     return  item;
                 }
             }
