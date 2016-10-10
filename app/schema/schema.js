@@ -56,7 +56,7 @@ var ItemSchema = new GraphQLSchema({
                 resolve: function (root, obj, ctx) {
                     console.log("item obj params",obj);
                     console.log("item ctx params",ctx);
-                    let item = ItemService();
+                    let item = ItemService.getItem();
                     return  item;
                 }
             }
