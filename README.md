@@ -1,5 +1,5 @@
 ## 开发环境启动
-- babel-node index.js 或node index.js 或 nodedev index.js
+- babel-node app/index.js 或 node index.js 或 nodedev index.js
 
 ## 生成环境 不需要打包
 - babel app --out-dir dist 
