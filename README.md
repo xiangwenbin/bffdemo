@@ -2,7 +2,7 @@
 - babel-node app/index.js 或 node index.js 或 nodedev index.js
 
 ## 生成环境 不需要打包
-- babel app --out-dir dist 
+- //babel app --out-dir dist 
 
 ## 依赖包说明
 - transform-strict-mode （由于很多 ES 特性需要 严格模式才能打开， 添加这个插件就会自动在所有文件上添加 'use strict';）
@@ -28,3 +28,24 @@
 		 -service 微服务数据接口
 		 
 		 -view 客户端模板文件目录
+
+## 一些命名规范
+- 所有js文件首字母小写
+- js中导出的对象 即export Object  首字母必须大写
+
+## 接口规范
+- 接口一律返回 json格式
+<pre>
+<code>
+{
+	code:200,//请求状态码
+	data:[]||{},//数据 可以是数组，可以是对象
+	msg:"",// 提示信息
+	ext:null //扩展信息
+}
+</code>
+</pre>
+
+## 一些常用包的介绍
+- request-promise https://www.npmjs.com/package/request-promise
+

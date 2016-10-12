@@ -3,7 +3,7 @@ import {
     GraphQLString,
     GraphQLInt
 } from 'graphql';
-
+import PromotionType from './promotionType'
 var ItemType = new GraphQLObjectType({
     name: "item",
     description: "item",
@@ -23,6 +23,14 @@ var ItemType = new GraphQLObjectType({
                 return (root.price / 100).toFixed(2);
             }
         }
+        // ,
+        // promotion:{
+        //     type: PromotionType,
+        //     description: "item price",
+        //     resolve: function (root, param, context) {
+        //         return (root.price / 100).toFixed(2);
+        //     }
+        // }
     }
 });
 

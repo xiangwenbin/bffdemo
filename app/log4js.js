@@ -7,7 +7,8 @@ log4js.configure({
     appenders: [
         {
             type: 'console',
-            level: 'DEBUG'
+            level: 'DEBUG',
+            category: "DEBUG"
         },
         {
             type: 'DateFile',

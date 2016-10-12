@@ -5,7 +5,6 @@ import { graphql } from 'graphql';
 var graphqlTest = router();
 
 graphqlTest.post('/graphql/test', async function (ctx, next) {
-
   console.log("ctx.request.body", ctx.request.body);
   await graphql(schema, ctx.request.body).then((result) => {
     console.log(result);
@@ -16,7 +15,7 @@ graphqlTest.post('/graphql/test', async function (ctx, next) {
 graphqlTest.post('/graphql/item', async function (ctx, next) {
   // ctx.body = 'graphqltest body '+JSON.stringify(ctx.request.body);
   console.log("ctx.request.body", ctx.request.body);
-  await graphql(ItemSchema, ctx.request.body).then((result) => {
+  await graphql(ItemSchema, ctx.request.body,null,ctx).then((result) => {
     console.log(result);
     ctx.body = JSON.stringify(result);
   })
