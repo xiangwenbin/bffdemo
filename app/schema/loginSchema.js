@@ -8,8 +8,8 @@ import LoginRes from '../model/loginRes';
 import LoginService from '../service/loginService';
 
 /**
- *  query LoginQuery { LoginRes{access_token,token_type,refresh_token,expires_in,scope}}
- *  query LoginQuery { LoginRes(loginId:"abc",passwd:"123456",type:"platform"){access_token,token_type,refresh_token,expires_in,scope}}
+ *  query LoginQuery { loginRes{access_token,token_type,refresh_token,expires_in,scope}}
+ *  query LoginQuery { loginRes(loginId:"abc",passwd:"123456",type:"platform"){access_token,token_type,refresh_token,expires_in,scope}}
  *  submit 参数可忽略
  */
 const LoginSchema = new GraphQLSchema({
@@ -17,7 +17,7 @@ const LoginSchema = new GraphQLSchema({
         name: "LoginQuery",
         description: "LoginQuery",
         fields: {
-            LoginRes: {
+            loginRes: {
                 type: LoginRes,
                 description: "LoginRes",
                 args: {

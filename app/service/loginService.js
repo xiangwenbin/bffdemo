@@ -16,14 +16,18 @@ class LoginService {
             uri: UrlProperties.sys.authorizationlogin,
             headers: {
                 'Content-Type': CONTENT_TYPE + CHARSET,
-                'Cookie': ctx.get("cookie")
+                'Cookie': ctx.get("Cookie")
             },
             form:loginInfo,
             json: true
         };
-        // console.log("request options:",options)
+        console.log("request options:",options)
         result = await rp(options).then(
              (jsonBody) =>{
+                //直接更新session里的token信息
+                if(jsonBody&&jsonBody.loginRes){
+                    ctx.session.loginRes = JSON.stringify(jsonBody.loginRes);
+                }
                 return jsonBody;
             }
         ).catch(
@@ -31,8 +35,35 @@ class LoginService {
                 throw error;
             }
         );
+        
         console.log("result:",result);
         return result;
+    }
+    static async loginOut(ctx) {
+        // let result = {};
+        // let options = {
+        //     method: 'GET',
+        //     uri: UrlProperties.sys.getAuthorizationloginout,
+        //     headers: {
+        //         'Content-Type': CONTENT_TYPE + CHARSET,
+        //         'Cookie': ctx.get("cookie")
+        //     },
+        //     form:loginInfo,
+        //     json: true
+        // };
+        // // console.log("request options:",options)
+        // result = await rp(options).then(
+        //      (jsonBody) =>{
+                
+        //         return jsonBody;
+        //     }
+        // ).catch(
+        //     (error)=>{
+        //         throw error;
+        //     }
+        // );
+        
+        // return result;
     }
 }
 
