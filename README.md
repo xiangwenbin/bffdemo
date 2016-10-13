@@ -21,7 +21,7 @@
 
 	app  nodejs  根目录
 	
-		 -const 常量 目录
+		 -const  常量目录
 		
 		 -filter 过滤器 koa中间件存放目录
 		
@@ -29,11 +29,11 @@
 		
 		 -router 路由 客户端调用的异步接口目录
 
-         -schema 客户端查询模型存放目录
+         -schema 客户端查询模型存放目录,一个客户端平台对应一个schema文件，commonSchema.js 为公共Schema;
 		
 		 -service 微服务数据接口
 		 
-		 -view 客户端视图数据模型存放目录
+		 -view 客户端视图数据模型存放目录 视图为GraphQL对象
 
 		 -template 客户端页面模版文件目录
 

@@ -7,7 +7,7 @@ import convert from 'koa-convert';
 import logger from 'koa-logger';
 import koaStatic from 'koa-static';
 import session from "koa2-cookie-session";
-import {people, Child, graphqlTest,LoginRouter} from './router';
+import { people, Child, graphqlTest, CommonRouter } from './router';
 import koaBody from './filter/koa-body';
 import bodyParser from 'body-parser';
 import log4js from './log4js';
@@ -18,23 +18,28 @@ const log = log4js.getLogger('DEBUG');
 //   static state="xxx";
 
 // }
-log.debug("启动目录:"+__dirname);
+log.debug("启动目录:" + __dirname);
 
 /**
  * 设置静态文件目录
+ * 
  */
 log.debug("设置静态文件目录:/public");
 app.use(convert(koaStatic('public')));
+
 /**
  * 设置回话
+ * 
  */
 app.use(session({
-    key: "SESSIONID",   //default "koa:sid" 
-    expires:3, //default 7 
-    path:"/" //default "/" 
+  key: "SESSIONID",   //default "koa:sid" 
+  expires: 3, //default 7 
+  path: "/" //default "/" 
 }));
+
 /**
  * 异常处理
+ * 
  */
 app.use(async (ctx, next) => {
   try {
@@ -48,38 +53,43 @@ app.use(async (ctx, next) => {
 
 /**
  * 访问日志 
- * */
+ * 
+ */
 // app.use(log4js.connectLogger(log4js.getLogger('access'), { level: log4js.levels.INFO }));
 log.debug("设置访问日志");
 app.use(convert(logger()));
 
 /**
  * 前置过滤器 
+ * 
  */
-app.use(async (ctx,next) => {
-   console.log("session:",ctx.session);
-   await next();
+app.use(async (ctx, next) => {
+  console.log("session:", ctx.session);
+  await next();
 });
 /**
  * 使用 自定义koabody中间件 提取body信息
- *  */
+ * 
+ */
 log.debug("设置request body filter");
 app.use(koaBody());
 
 /**
  * 请求路由
- *  */
-
+ * 
+ */
 // app.use(bodyParser.text({type: 'application/graphql'}));
 log.debug("设置请求路由");
 app.use(people.routes());
 app.use(new Child().getRouters());
 app.use(graphqlTest.routes());
-app.use(LoginRouter.routes());
+// app.use(LoginRouter.routes());
+app.use(CommonRouter.routes());
 
 /**
  * 默认404请求返回值
- * */
+ * 
+ */
 app.use((ctx) => {
   ctx.body = JSON.stringify({ code: 404, data: 'null' });
 });

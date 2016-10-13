@@ -3,7 +3,9 @@ import {
     GraphQLString,
     GraphQLInt
 } from 'graphql';
-
+/**
+ * 登录token信息视图
+ */
 var LoginRes = new GraphQLObjectType({
     name: "LoginRes",
     description: "item",
@@ -27,6 +29,13 @@ var LoginRes = new GraphQLObjectType({
         scope: {
             type: GraphQLString,
             description: "scope"
+        },
+        test: {
+            type: GraphQLString,
+            resolve: (root) => {
+                console.log("root",root);
+                return "test";
+            }
         }
     }
 });
