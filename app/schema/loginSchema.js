@@ -4,7 +4,7 @@ import {
     GraphQLInt,
     GraphQLString
 } from 'graphql';
-import LoginRes from '../model/loginRes';
+import LoginRes from '../view/loginRes';
 import LoginService from '../service/loginService';
 
 /**

@@ -1,5 +1,11 @@
+## 安装本地环境
+- npm intall -g node-dev nodedev babel babel-cli
+
+## 项目初始化
+- npm intall 
+
 ## 开发环境启动
-- babel-node app/index.js 或 node index.js 或 nodedev index.js
+- babel-node app/index.js 或 node index.js 或 nodedev index.js 或 node-dev --debug index.js
 
 ## 生成环境 不需要打包
 - //babel app --out-dir dist 
@@ -11,15 +17,15 @@
 - transform-es2015-destructuring （支持 赋值解构）
 - transform-es2015-parameters （支持默认参数， 参数解构， 以及其他参数）
 
-## 目录结构说明
+## node app服务 目录结构说明
 
-	app  js 根目录
+	app  nodejs  根目录
 	
 		 -const 常量 目录
 		
 		 -filter 过滤器 koa中间件存放目录
 		
-		 -model 基础数据模型存放目录
+		 -model  基础数据模型存放目录 //暂时，将来会移除
 		
 		 -router 路由 客户端调用的异步接口目录
 
@@ -27,7 +33,9 @@
 		
 		 -service 微服务数据接口
 		 
-		 -view 客户端模板文件目录
+		 -view 客户端视图数据模型存放目录
+
+		 -template 客户端页面模版文件目录
 
 ## 一些命名规范
 - 所有js文件首字母小写
