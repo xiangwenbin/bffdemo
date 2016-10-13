@@ -6,7 +6,7 @@ import {
 /**
  * 登录token信息视图
  */
-var LoginRes = new GraphQLObjectType({
+const LoginRes = new GraphQLObjectType({
     name: "LoginRes",
     description: "item",
     fields: {

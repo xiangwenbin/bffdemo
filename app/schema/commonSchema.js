@@ -9,7 +9,7 @@ import LoginReq from '../view/loginReq';
 import LoginService from '../service/loginService';
 /**
  *  公共查询Schema
- * 
+ *  query RootQueryType {} 
  */
 const CommonSchema = new GraphQLSchema({
     query: new GraphQLObjectType({
@@ -40,22 +40,3 @@ const CommonSchema = new GraphQLSchema({
     })
 });
 export default CommonSchema;
-
-// args: {
-//     loginId: {
-//         type: GraphQLString,
-//         description: ''
-//     },
-//     passwd: {
-//         type: GraphQLString,
-//         description: ''
-//     },
-//     submit: {
-//         type: GraphQLString,
-//         description: ''
-//     },
-//     type: {
-//         type: GraphQLString,
-//         description: ''
-//     }
-// },

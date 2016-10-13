@@ -54,6 +54,7 @@
 </code>
 </pre>
 
-## 一些常用包的介绍
+## 资料
+- graphql http://graphql.org/graphql-js/
 - request-promise https://www.npmjs.com/package/request-promise
 
