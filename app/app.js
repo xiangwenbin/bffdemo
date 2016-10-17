@@ -7,17 +7,24 @@ import convert from 'koa-convert';
 import logger from 'koa-logger';
 import koaStatic from 'koa-static';
 import session from "koa2-cookie-session";
+import Eureka from 'eureka-js-client';
+import Yaml from 'yaml-config';
+import path from 'path';
+
 import { people, Child, graphqlTest, CommonRouter } from './router';
 import koaBody from './filter/koa-body';
 import bodyParser from 'body-parser';
 import log4js from './log4js';
 const app = new Koa();
+global.CONFIG = Yaml.readConfig(path.join(__dirname,'appliction.yml')); 
+const eurekaConfig = Yaml.readConfig(path.join(__dirname,'eureka-client.yml')); 
 const log = log4js.getLogger('DEBUG');
-
+console.log(CONFIG);
 // class Xddd{
 //   static state="xxx";
 
 // }
+log.debug("NODE_ENV:" + process.env.NODE_ENV);
 log.debug("启动目录:" + __dirname);
 
 /**
@@ -98,6 +105,22 @@ app.use((ctx) => {
 app.on('error', (err, ctx) => {
   console.error('服务异常：', err, ctx);
 });
-app.listen(3000, () => console.log('server started 3000'))
 
-export default app
+app.listen(CONFIG.server.port, () => console.log('server started 3000'))
+
+
+
+//Eureka 服务注册
+var  client = new Eureka({
+  cwd: __dirname, 
+  instance: {
+    statusPageUrl: `http://localhost:${CONFIG.server.port}/info`,
+    port: {
+      '$': CONFIG.server.port,
+      '@enabled': 'true'
+    }
+  }
+});
+client.start();
+// client.getInstancesByAppId('BASEINFO');
+setTimeout(()=>console.log("client",client.getInstancesByAppId('BASEINFO')),3000);

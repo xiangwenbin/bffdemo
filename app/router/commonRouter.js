@@ -7,9 +7,12 @@ const CommonRouter = router();
 /**
  * 公共路由
  */
-CommonRouter.post('/graphql/common', async (ctx, next) => {
+CommonRouter.post('/common', async (ctx, next) => {
   await graphql(CommonSchema, ctx.request.body, null, ctx).then((result) => {
     ctx.body = JSON.stringify(result);
   })
+});
+CommonRouter.post('/graphqlxx',  (ctx, next) => {
+    ctx.body = "xzz";
 });
 export default CommonRouter;

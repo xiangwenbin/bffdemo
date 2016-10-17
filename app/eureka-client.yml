@@ -1,0 +1,15 @@
+instance:
+  app: graphql
+  hostName: graphql
+  ipAddr: 192.168.90.109
+  vipAddress: graphql.test.something.com
+  dataCenterInfo:
+    '@class': com.netflix.appinfo.InstanceInfo$DefaultDataCenterInfo
+    name: MyOwn
+  port: 3000
+eureka:
+  host: 192.168.10.54
+  port: 1111
+  servicePath:  /eureka/apps/
+
+ 

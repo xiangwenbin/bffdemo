@@ -11,6 +11,8 @@
   "dependencies": {
     "babel-polyfill": "^6.16.0",
     "body-parser": "^1.15.2",
+    "coordinator-node-client": "^1.0.6",
+    "eureka-js-client": "^4.1.0",
     "graphql": "^0.7.1",
     "koa": "^2.0.0-alpha.7",
     "koa-body": "^1.6.0",
@@ -22,7 +24,8 @@
     "lodash": "^4.16.4",
     "log4js": "^0.6.38",
     "request": "^2.75.0",
-    "request-promise": "^4.1.1"
+    "request-promise": "^4.1.1",
+    "yaml-config": "^0.3.0"
   },
   "devDependencies": {
     "babel-cli": "^6.16.0",
