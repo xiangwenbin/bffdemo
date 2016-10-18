@@ -3,6 +3,7 @@ import router from 'koa-router';
 import CommonSchema from '../schema/commonSchema';
 import { graphql } from 'graphql';
 import LoginService from '../service/loginService';
+import Util from '../util/util';
 const CommonRouter = router();
 /**
  * 公共路由
@@ -12,7 +13,14 @@ CommonRouter.post('/common', async (ctx, next) => {
     ctx.body = JSON.stringify(result);
   })
 });
-CommonRouter.post('/graphqlxx',  (ctx, next) => {
-    ctx.body = "xzz";
+CommonRouter.get('/getTest', (ctx, next) => {
+  ctx.body = "getTest body";
+});
+CommonRouter.get('/info', (ctx, next) => {
+  ctx.body = "node service";
+});
+CommonRouter.get('/mservice/:serviceName', (ctx, next) => {
+  let baseUrl = Util.getBaseUrlByServiceName(ctx.params.serviceName);
+  ctx.body = baseUrl;
 });
 export default CommonRouter;

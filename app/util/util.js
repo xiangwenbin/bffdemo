@@ -14,5 +14,15 @@ class Util {
             };
         }
     }
+    
+    static getBaseUrlByServiceName(name){
+
+        let instances= eurekaClient.getInstancesByAppId(name);
+        //开发环境取配置里的服务ip
+        if(process.env.NODE_ENV=="dev"){
+            return `http://${CONFIG.mservice.ip}:${instances[0].port.$}`;
+        }else
+            return `http://${instances[0].ipAddr}:${instances[0].port.$}`;
+    }
 }
 export default Util;

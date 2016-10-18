@@ -10,20 +10,45 @@ import session from "koa2-cookie-session";
 import Eureka from 'eureka-js-client';
 import Yaml from 'yaml-config';
 import path from 'path';
+import { argv } from 'optimist';
 
 import { people, Child, graphqlTest, CommonRouter } from './router';
 import koaBody from './filter/koa-body';
 import bodyParser from 'body-parser';
 import log4js from './log4js';
-const app = new Koa();
-global.CONFIG = Yaml.readConfig(path.join(__dirname,'appliction.yml')); 
-const eurekaConfig = Yaml.readConfig(path.join(__dirname,'eureka-client.yml')); 
-const log = log4js.getLogger('DEBUG');
+process.env.NODE_ENV = !process.env.NODE_ENV ? "dev" : process.env.NODE_ENV;
+
+//获取启动配置参数
+global.CONFIG = Yaml.readConfig(path.join(__dirname, 'appliction.yml'), process.env.NODE_ENV);
 console.log(CONFIG);
+
+const app = new Koa();
+// const eurekaConfig = Yaml.readConfig(path.join(__dirname,'eureka-client.yml')); 
+const log = log4js.getLogger('DEBUG');
+
+//获取启动入参 node index.js --ip 127.0.0.1
+console.log("argv:", argv);
+
+if (!argv.ip) {
+  var os = require('os');
+  var ifaces = os.networkInterfaces();
+  for (var dev in ifaces) {
+    ifaces[dev].forEach(function (details) {
+      //获取本地无线的ip
+      if (details.family == 'IPv4' && (dev.toLowerCase() == "wlan")) {
+        argv.ip = details.address;
+      }
+    });
+  }
+}
+
+
 // class Xddd{
 //   static state="xxx";
 
 // }
+//NODE_ENV dev ,test,production defualt dev
+
 log.debug("NODE_ENV:" + process.env.NODE_ENV);
 log.debug("启动目录:" + __dirname);
 
@@ -106,21 +131,26 @@ app.on('error', (err, ctx) => {
   console.error('服务异常：', err, ctx);
 });
 
-app.listen(CONFIG.server.port, () => console.log('server started 3000'))
+app.listen(CONFIG.server.port, () => console.log(`server started ${CONFIG.server.port}`));
 
 
 
 //Eureka 服务注册
-var  client = new Eureka({
-  cwd: __dirname, 
+global.eurekaClient = new Eureka({
+  cwd: __dirname,
   instance: {
-    statusPageUrl: `http://localhost:${CONFIG.server.port}/info`,
+    ipAddr: argv.ip || '127.0.0.1',
+    statusPageUrl: `http://${argv.ip}:${CONFIG.server.port}/info`,
     port: {
       '$': CONFIG.server.port,
       '@enabled': 'true'
     }
   }
 });
-client.start();
-// client.getInstancesByAppId('BASEINFO');
-setTimeout(()=>console.log("client",client.getInstancesByAppId('BASEINFO')),3000);
+//心跳
+// eurekaClient.on("heartbeat", () => {
+//   console.log("heartbeat", eurekaClient.cache);
+// });
+eurekaClient.start();
+// eurekaClient.getInstancesByAppId('BASEINFO');
+// setTimeout(()=>console.log("client",JSON.stringify(eurekaClient.getInstancesByAppId('BASEINFO'))),3000);

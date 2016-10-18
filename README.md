@@ -6,7 +6,7 @@
 
 ## 开发环境启动
 - babel-node app/index.js 或 node index.js 或 nodedev index.js 或 node-dev --debug index.js
-
+- node index.js --ip 本地ip
 ## 生成环境 不需要打包
 - //babel app --out-dir dist 
 
