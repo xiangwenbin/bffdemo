@@ -152,5 +152,10 @@ global.eurekaClient = new Eureka({
 //   console.log("heartbeat", eurekaClient.cache);
 // });
 eurekaClient.start();
+//进程退出事件
+process.on('exit', ()=>{
+  console.log("进程终止");
+ eurekaClient.stop();
+});
 // eurekaClient.getInstancesByAppId('BASEINFO');
 // setTimeout(()=>console.log("client",JSON.stringify(eurekaClient.getInstancesByAppId('BASEINFO'))),3000);

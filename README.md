@@ -7,6 +7,7 @@
 ## 开发环境启动
 - babel-node app/index.js 或 node index.js 或 nodedev index.js 或 node-dev --debug index.js
 - node index.js --ip 本地ip
+
 ## 生成环境 不需要打包
 - //babel app --out-dir dist 
 
@@ -32,10 +33,14 @@
          -schema 客户端查询模型存放目录,一个客户端平台对应一个schema文件，commonSchema.js 为公共Schema;
 		
 		 -service 微服务数据接口
+
+		 -template 客户端页面模版文件目录
+
+		 -util 公共类
 		 
 		 -view 客户端视图数据模型存放目录 视图为GraphQL对象
 
-		 -template 客户端页面模版文件目录
+		 
 
 ## 一些命名规范
 - 所有js文件首字母小写
