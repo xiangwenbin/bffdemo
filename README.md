@@ -64,7 +64,8 @@ import convert from 'koa-convert';
 <code>
 {
 	code:200,//请求状态码
-	data:[]||{},//数据 可以是数组，可以是对象
+	data:[]||{},//数据 可以是数组，可以是对象,
+	pageInfo:{},//分页信息
 	msg:"",// 提示信息
 	ext:null //扩展信息
 }

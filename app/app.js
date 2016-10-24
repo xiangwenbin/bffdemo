@@ -145,6 +145,7 @@ global.eurekaClient = new Eureka({
   cwd: __dirname,
   instance: {
     ipAddr: argv.ip || '127.0.0.1',
+    hostName:argv.ip || '127.0.0.1',
     statusPageUrl: `http://${argv.ip}:${CONFIG.server.port}/info`,
     port: {
       '$': CONFIG.server.port,

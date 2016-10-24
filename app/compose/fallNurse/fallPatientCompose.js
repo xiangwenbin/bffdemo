@@ -17,9 +17,9 @@ class FallPatientCompose {
     //获取跌倒病人概要
     async getFallPatientSummary(status, unitCode, nursingLevel = "", page = 1, size = 0) {
         console.log(arguments);
-        let result = [];
+        let result = {};
         // Promise.all([PatientService.getPatientListByStatusAndUnitCodeOrNursingLevel(),]);
-        let patientList = await this.patientService.getPatientListByStatusAndUnitCodeOrNursingLevel(status, unitCode, nursingLevel = "", page = 1, size = 0).then(
+        result = await this.patientService.getPatientListByStatusAndUnitCodeOrNursingLevel(status, unitCode, nursingLevel = "", page, size).then(
             (jsonBody) => {
                 return jsonBody;
             }
@@ -27,6 +27,7 @@ class FallPatientCompose {
             console.log(error);
             throw error;
         });
+        let patientList=result.content;
         // console.log(patientList);
         if (patientList.length > 0) {
             let mrnList = [];
@@ -50,7 +51,7 @@ class FallPatientCompose {
             });
             // console.log(fallPatientList);
         }
-        return patientList;
+        return result;
     }
 }
 
