@@ -11,8 +11,8 @@ instance:
   port: 3000
 eureka:
   fetchRegistry: true
-  host: 127.0.0.1
+  host: 192.168.10.54
   port: 1111
   servicePath:  /eureka/apps/
-#192.168.10.54
+# 192.168.10.54
 #PRESSURE-SERVICE

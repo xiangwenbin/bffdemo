@@ -1,3 +1,7 @@
+##  Node版本
+- ^v6.2.2
+
+
 ## 安装本地环境
 - npm intall -g node-dev nodedev babel babel-cli
 
@@ -45,6 +49,14 @@
 ## 一些命名规范
 - 所有js文件首字母小写
 - js中导出的对象 即export Object  首字母必须大写
+- 使用import 导入包的时候，如果导出包为类 变量名为首字母大写，如果导出的包为函数，则首字母小写
+例
+<pre>
+<code>
+import Koa from 'koa';
+import convert from 'koa-convert';
+</code>
+</pre>
 
 ## 接口规范
 - 接口一律返回 json格式
@@ -63,4 +75,5 @@
 - graphql http://graphql.org/graphql-js/
 - request-promise https://www.npmjs.com/package/request-promise
 - eureka-js-client https://www.npmjs.com/package/eureka-js-client
+- Spring Cloud源码分析（二）Ribbon http://blog.didispace.com/springcloud-sourcecode-ribbon/
 

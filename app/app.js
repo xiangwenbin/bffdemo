@@ -1,4 +1,9 @@
 /**
+ * 设置默认环境变量
+ */
+process.env.NODE_ENV = !process.env.NODE_ENV ? "dev" : process.env.NODE_ENV;
+
+/**
  * 服务启动入口
  * convert 包的作用 转换过时的generator中间件到anync中间件，如kao-static,koa-logger 
  */
@@ -16,12 +21,12 @@ import { people, Child, graphqlTest, CommonRouter } from './router';
 import koaBody from './filter/koa-body';
 import bodyParser from 'body-parser';
 import log4js from './log4js';
-process.env.NODE_ENV = !process.env.NODE_ENV ? "dev" : process.env.NODE_ENV;
+
 
 //获取启动配置参数
 global.CONFIG = Yaml.readConfig(path.join(__dirname, 'appliction.yml'), process.env.NODE_ENV);
 console.log(CONFIG);
-
+console.log(Math.random());
 const app = new Koa();
 // const eurekaConfig = Yaml.readConfig(path.join(__dirname,'eureka-client.yml')); 
 const log = log4js.getLogger('DEBUG');
@@ -153,9 +158,9 @@ global.eurekaClient = new Eureka({
 // });
 eurekaClient.start();
 //进程退出事件
-process.on('exit', ()=>{
+process.on('exit', () => {
   console.log("进程终止");
- eurekaClient.stop();
+  eurekaClient.stop();
 });
 // eurekaClient.getInstancesByAppId('BASEINFO');
 // setTimeout(()=>console.log("client",JSON.stringify(eurekaClient.getInstancesByAppId('BASEINFO'))),3000);
